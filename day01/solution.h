@@ -1,5 +1,5 @@
-#include "absl/status/statusor.h"
-#include "absl/container/flat_hash_set.h"
+#include <cstdint>
+#include <vector>
 
-absl::StatusOr<int32_t> TwoSumsTo2020(const absl::flat_hash_set<int32_t>& numbers);
-absl::StatusOr<int32_t> ThreeSumsTo2020(const absl::flat_hash_set<int32_t>& numbers);
+int32_t CountIncreases(const std::vector<int32_t>& numbers);
+int32_t CountWindowIncreases(const std::vector<int32_t>& numbers);
