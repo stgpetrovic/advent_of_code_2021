@@ -22,6 +22,7 @@ constexpr int32_t kMax = 5;
 class BingoBoard {
  public:
   BingoBoard(const std::vector<std::string> in) {
+    dark_sum_ = 0;
     for (int i = 0; i < 5; ++i) {
       std::string escaped = absl::StrReplaceAll(in[i], {{"  ", " "}});
       if (escaped[0] == ' ') {
@@ -36,6 +37,7 @@ class BingoBoard {
         }
         b_[i][j] = n;
         hits_[i][j] = false;
+        dark_sum_ += n;
       }
     }
   }
@@ -47,6 +49,7 @@ class BingoBoard {
           hits_[i][j] = true;
           LOG(INFO) << " Hit " << number << "(" << i << " " << j << ")";
           latest_ = std::make_pair(i, j);
+          dark_sum_ -= number;
           return true;
         }
       }
@@ -54,18 +57,7 @@ class BingoBoard {
     return false;
   }
 
-  int32_t DarkSum() {
-    int32_t dark_sum = 0;
-    for (int i = 0; i < 5; ++i) {
-      for (int j = 0; j < 5; ++j) {
-        if (!hits_[i][j]) {
-          dark_sum += b_[i][j];
-        }
-      }
-    }
-    LOG(INFO) << "Dark Sum " << dark_sum;
-    return dark_sum;
-  }
+  int32_t DarkSum() { return dark_sum_; }
 
   bool Victory() {
     int32_t cnt = 0;
@@ -90,6 +82,7 @@ class BingoBoard {
   int32_t b_[kMax][kMax];
   bool hits_[kMax][kMax];
   std::pair<size_t, size_t> latest_;
+  int32_t dark_sum_;
 };
 
 class Game {
