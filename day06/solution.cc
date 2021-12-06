@@ -15,7 +15,6 @@
 #include "absl/strings/str_join.h"
 #include "absl/strings/str_replace.h"
 #include "absl/strings/str_split.h"
-#include "day06/infint.h"
 
 namespace {
 
@@ -32,7 +31,7 @@ std::vector<int64_t> VectorAtoi(const std::vector<std::string>& in) {
 }  // namespace
 
 // TODO: mozda nesto sa 2^(days/7+1) +- dronjci pocetni.
-absl::StatusOr<std::string> Spawn(const std::vector<std::string>& input,
+absl::StatusOr<int64_t> Spawn(const std::vector<std::string>& input,
                                   int64_t total_days) {
   LOG(INFO) << " Ages " << input[0];
   std::vector<int64_t> ages = VectorAtoi(absl::StrSplit(input[0], ","));
@@ -55,10 +54,11 @@ absl::StatusOr<std::string> Spawn(const std::vector<std::string>& input,
     }
   }
 
-  InfInt sum = 0;
+  int64_t sum=0;
   for (size_t age = 0; age < 9; ++age) {
     sum += clock[age];
+    LOG(INFO) << sum;
   }
 
-  return sum.toString();
+  return sum;
 }

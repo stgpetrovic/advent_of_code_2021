@@ -8,7 +8,7 @@ cc_library(
     "@com_google_absl//absl/strings",
   ],
   srcs = ["solution.cc"],
-  hdrs = ["solution.h","infint.h"],
+  hdrs = ["solution.h"],
 )
 
 cc_test(

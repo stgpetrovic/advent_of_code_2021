@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
   absl::ParseCommandLine(argc, argv);
 
-  absl::StatusOr<std::string> result;
+  absl::StatusOr<int64_t> result;
   auto input = ReadInput();
   auto first = !absl::GetFlag(FLAGS_second_part);
   if (first) {
