@@ -34,10 +34,11 @@ class Plastic {
         template_ = line;
       } else {
         // From AB, with AB->C, new tokens are AC and CB.
-        grammar_[std::make_pair(parts[0][0], parts[0][1])].push_back(
-            std::make_pair(parts[0][0], parts[1][0]));
-        grammar_[std::make_pair(parts[0][0], parts[0][1])].push_back(
-            std::make_pair(parts[1][0], parts[0][1]));
+       const char A = parts[0][0];
+       const char B = parts[0][1];
+       const char C = parts[1][0];
+        grammar_[std::make_pair(A, B)].push_back(std::make_pair(A, C));
+        grammar_[std::make_pair(A, B)].push_back(std::make_pair(C, B));
       }
     }
   }
